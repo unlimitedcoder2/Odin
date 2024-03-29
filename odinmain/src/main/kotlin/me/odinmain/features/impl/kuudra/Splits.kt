@@ -5,11 +5,11 @@ import me.odinmain.events.impl.ReceivePacketEvent
 import me.odinmain.features.Category
 import me.odinmain.features.Module
 import me.odinmain.features.settings.impl.*
-import me.odinmain.font.OdinFont
 import me.odinmain.ui.hud.HudElement
 import me.odinmain.utils.getSafe
 import me.odinmain.utils.noControlCodes
 import me.odinmain.utils.render.Color
+import me.odinmain.utils.render.getTextHeight
 import me.odinmain.utils.render.getTextWidth
 import me.odinmain.utils.render.text
 import me.odinmain.utils.round
@@ -78,8 +78,8 @@ object Splits : Module(
                     4 -> splitsLine5
                     else -> Color.WHITE
                 }
-                text(lines[i], 1f, 9f + i * OdinFont.getTextHeight("12", 13f), lineColor, 12f, shadow = true)
-                text("0s", OdinFont.getTextWidth("Fuel/Stun: 0h 00m 00s", 12f) - OdinFont.getTextWidth("0s", 12f), 9f + i * OdinFont.getTextHeight("12", 13f), Color.WHITE, 12f, shadow = true)
+                text(lines[i], 1f, 9f + i * getTextHeight("12", 13f), lineColor, 12f, shadow = true)
+                text("0s", getTextWidth("Fuel/Stun: 0h 00m 00s", 12f) - getTextWidth("0s", 12f), 9f + i * getTextHeight("12", 13f), Color.WHITE, 12f, shadow = true)
             }
 
             getTextWidth("Fuel/Stun: 0h 00m 00s", 12f) + 2f to 80f
@@ -98,11 +98,10 @@ object Splits : Module(
                     4 -> splitsLine5
                     else -> Color.WHITE
                 }
-                text(lines[i], 1f, 9f + i * OdinFont.getTextHeight("12", 13f), lineColor, 12f, shadow = true)
+                text(lines[i], 1f, 9f + i * getTextHeight("12", 13f), lineColor, 12f, shadow = true)
 
                 val duration = formatTime(time)
-                text(duration, OdinFont.getTextWidth("Fuel/Stun: 0h 00m 00s", 12f) - OdinFont.getTextWidth(duration, 12f), 9f + i * OdinFont.getTextHeight("12", 13f), Color.WHITE, 12f, shadow = true)
-            }
+                text(duration, getTextWidth("Fuel/Stun: 0h 00m 00s", 12f) - getTextWidth(duration, 12f), 9f + i * getTextHeight("12", 13f), Color.WHITE, 12f, shadow = true)            }
 
             getTextWidth("Fuel/Stun: 0h 00m 00s", 12f) + 2f to 80f
         }
