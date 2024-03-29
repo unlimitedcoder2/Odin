@@ -11,7 +11,6 @@ import me.odinmain.features.ModuleManager
 import me.odinmain.features.impl.render.ClickGUIModule
 import me.odinmain.features.impl.render.DevPlayers
 import me.odinmain.features.impl.render.WaypointManager
-import me.odinmain.font.OdinFont
 import me.odinmain.ui.clickgui.ClickGUI
 import me.odinmain.ui.util.RoundedRect
 import me.odinmain.utils.ServerUtils
@@ -83,7 +82,6 @@ object OdinMain {
             highlightCommand,
             waypointCommand
         )
-        OdinFont.init()
     }
 
     fun postInit() = scope.launch(Dispatchers.IO) {

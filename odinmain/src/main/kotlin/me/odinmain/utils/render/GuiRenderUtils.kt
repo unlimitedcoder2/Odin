@@ -2,7 +2,7 @@ package me.odinmain.utils.render
 
 import gg.essential.universal.UMatrixStack
 import me.odinmain.OdinMain.mc
-import me.odinmain.font.OdinFont
+import me.odinmain.font.FontRenderer
 import me.odinmain.ui.clickgui.util.ColorUtil
 import me.odinmain.ui.util.RoundedRect
 import me.odinmain.utils.*
@@ -16,7 +16,8 @@ import org.lwjgl.opengl.GL11
 
 val matrix = UMatrixStack.Compat
 val scaleFactor get() = ScaledResolution(mc).scaleFactor.toFloat()
-
+class Font(val fr: FontRenderer)
+val font = Font(FontRenderer("/assets/odinmain/fonts/Inter-Regular.ttf", 100f))
 data class Box(var x: Number, var y: Number, var w: Number, var h: Number)
 data class BoxWithClass<T : Number>(var x: T, var y: T, var w: T, var h: T)
 fun Box.expand(factor: Number): Box = Box(this.x - factor, this.y - factor, this.w + factor * 2, this.h + factor * 2)
@@ -72,7 +73,7 @@ fun drawHSBBox(x: Float, y: Float, w: Float, h: Float, color: Color) {
     matrix.runLegacyMethod(matrix.get()) {
         RoundedRect.drawHSBBox(
             matrix.get(),
-            x.toFloat(),
+            x,
             y.toFloat(),
             w.toFloat(),
             h.toFloat(),
@@ -96,13 +97,14 @@ fun circle(x: Number, y: Number, radius: Number, color: Color, borderColor: Colo
     }
 }
 
-fun text(text: String, x: Float, y: Float, color: Color, size: Float, type: Int = OdinFont.REGULAR, align: TextAlign = Left, verticalAlign: TextPos = TextPos.Middle, shadow: Boolean = false) {
-    OdinFont.text(text, x, y, color, size, align, verticalAlign, shadow, type)
+fun text(text: String, x: Float, y: Float, color: Color, size: Float, type: Int = 1, align: TextAlign = Left, verticalAlign: TextPos = TextPos.Middle, shadow: Boolean = false) {
+    //OdinFont.text(text, x, y, color, size, align, verticalAlign, shadow, type)
+    font.fr.drawString(text, x, y, color)
 }
 
-fun getTextWidth(text: String, size: Float) = OdinFont.getTextWidth(text, size)
+fun getTextWidth(text: String, size: Float) = font.fr.getWidth(text)
 
-fun getTextHeight(text: String, size: Float) = OdinFont.getTextHeight(text, size)
+fun getTextHeight(text: String, size: Float) = font.fr.getHeight(text)
 
 fun translate(x: Number, y: Number, z: Number = 0f) = GlStateManager.translate(x.toDouble(), y.toDouble(), z.toDouble())
 
@@ -167,12 +169,15 @@ fun drawDynamicTexture(dynamicTexture: DynamicTexture, x: Float, y: Float, w: Fl
     drawTexturedModalRect(x.toInt(), y.toInt(), w.toInt(), h.toInt())
 }
 
-fun wrappedText(text: String, x: Float, y: Float, w: Float, color: Color, size: Float, type: Int = OdinFont.REGULAR, shadow: Boolean = false) {
-    OdinFont.wrappedText(text, x, y, w, color, size, type, shadow = shadow)
+fun wrappedText(text: String, x: Float, y: Float, w: Float, color: Color, size: Float, type: Int = 1, shadow: Boolean = false) {
+    //font.fr.wrappedText(text, x, y, w, color, size, type, shadow)
+    //OdinFont.wrappedText(text, x, y, w, color, size, type, shadow = shadow)
 }
 
 fun wrappedTextBounds(text: String, width: Float, size: Float): Pair<Float, Float> {
-    return OdinFont.wrappedTextBounds(text, width, size)
+    //return font.fr.wrappedTextBounds(text, width, size)
+    //return OdinFont.wrappedTextBounds(text, width, size)
+    return 0f to 0f
 }
 
 enum class TextAlign {

@@ -1,7 +1,6 @@
 package me.odinmain.utils.render
 
 import me.odinmain.OdinMain.mc
-import me.odinmain.font.OdinFont
 import me.odinmain.ui.clickgui.util.ColorUtil.withAlpha
 import me.odinmain.utils.addVec
 import me.odinmain.utils.min
@@ -157,10 +156,10 @@ object Renderer {
         if (event.type != RenderGameOverlayEvent.ElementType.ALL) return
         mc.entityRenderer.setupOverlayRendering()
         if (displayTitle.isEmpty()) return
-        scale(1f / scaleFactor, 1f / scaleFactor, 1f)
+        //scale(1f / scaleFactor, 1f / scaleFactor, 1f)
 
-        text(text = displayTitle, x = (Display.getWidth() / 2f) - (OdinFont.getTextWidth(displayTitle, 50f) / 2), y = Display.getHeight() * 0.44f, color = displayColor, size = 50f, shadow = true)
-        scale(scaleFactor, scaleFactor, 1f)
+        text(text = displayTitle, x = (Display.getWidth() / 2f) - (getTextWidth(displayTitle, 5f) / 2), y = Display.getHeight() * 0.44f, color = displayColor, size = 50f, shadow = true)
+       // scale(scaleFactor, scaleFactor, 1f)
     }
 
     @SubscribeEvent
